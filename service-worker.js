@@ -6,9 +6,9 @@ self.addEventListener('install', function(event) {
         '/index.html',
         '/styles/style.css',
         '/js/app.js',
-        '/icons/Heart.png',
-        '/icons/Heart2.png',
-        '/icons/Heart3.png'
+        '/icons/heart.png',
+        '/icons/heart2.png',
+        '/icons/heart3.png'
       ]);
     })
   );

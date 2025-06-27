@@ -7,17 +7,17 @@
   "theme_color": "#ff4b5c",
   "icons": [
     {
-      "src": "icons/Heart.png",
+      "src": "icons/heart.png",
       "sizes": "48x48",
       "type": "image/png"
     },
     {
-      "src": "icons/Heart2.png",
+      "src": "icons/heart2.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icons/Heart3.png",
+      "src": "icons/heart3.png",
       "sizes": "512x512",
       "type": "image/png"
     }
