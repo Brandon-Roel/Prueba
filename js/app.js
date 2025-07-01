@@ -1,46 +1,106 @@
-const mensajes = [
-  "El amor eres tú 💖",
-  "Hoy es un buen día para decir te quiero 💕",
-  "Eres una persona increíble 🌟",
-  "¡Sonríe! Alguien piensa en ti 😊",
-  "El amor está en el aire ✨"
+// js/app.js
+
+// CONSEJOS
+const consejos = [
+  "Apaga las luces cuando salgas de una habitación.",
+  "Usa transporte público o bicicleta siempre que puedas.",
+  "Evita plásticos de un solo uso.",
+  "Ahorra agua al ducharte en menos de 5 minutos.",
+  "Recicla papel, vidrio, plástico y metales.",
+  "Planta un árbol o cuida una planta.",
+  "Compra productos locales y de temporada."
 ];
 
-function mostrarAmor() {
-  const mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
-  document.getElementById("mensaje").textContent = mensaje;
+function mostrarConsejo() {
+  const consejo = consejos[Math.floor(Math.random() * consejos.length)];
+  document.getElementById("consejo").innerText = consejo;
 }
 
-// Registrar el Service Worker
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js')
-    .then(() => console.log('✔ Service Worker registrado'))
-    .catch((error) => console.log('❌ Error en el Service Worker', error));
-}
+// CALCULADORA
+document.getElementById("impact-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const km = parseInt(document.getElementById("km").value) || 0;
+  const carne = parseInt(document.getElementById("carne").value) || 0;
 
-// Código para mostrar el botón de instalar PWA
-let deferredPrompt;
-const btnInstalar = document.getElementById('btnInstalar');
+  const impacto = km * 0.2 + carne * 1.5;
+  const resultado = document.getElementById("resultado");
+  const mensaje = document.getElementById("mensajeMotivador");
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); // Evita que se muestre el diálogo automático
-  deferredPrompt = e; // Guarda el evento
-  btnInstalar.style.display = 'inline-block'; // Muestra el botón
+  // Colores
+  if (impacto < 10) {
+    resultado.className = "resultado-verde";
+    resultado.textContent = "Impacto bajo 🌱 ¡Sigue así!";
+    mensaje.textContent = "¡Genial! Estás ayudando al planeta.";
+  } else if (impacto < 25) {
+    resultado.className = "resultado-amarillo";
+    resultado.textContent = "Impacto medio 🌤️ Puedes mejorar.";
+    mensaje.textContent = "¡Vas bien! Unos pequeños cambios pueden ayudar mucho.";
+  } else {
+    resultado.className = "resultado-rojo";
+    resultado.textContent = "Impacto alto 🔥 ¡Hora de actuar!";
+    mensaje.textContent = "No te preocupes, ¡cada paso cuenta para mejorar!";
+  }
+
+  // Gráfico
+  const ctx = document.getElementById("graficoImpacto").getContext("2d");
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Conducir', 'Comer carne'],
+      datasets: [{
+        data: [km * 0.2, carne * 1.5],
+        backgroundColor: ['#4caf50', '#ff9800']
+      }]
+    },
+    options: {
+      responsive: false,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
+  });
 });
 
-btnInstalar.addEventListener('click', () => {
-  btnInstalar.style.display = 'none'; // Oculta el botón
+// DESAFÍOS
+const desafios = [
+  "Lunes: Usa bolsa reutilizable.",
+  "Martes: No uses coche hoy.",
+  "Miércoles: Come una comida vegetariana.",
+  "Jueves: Apaga aparatos en desuso.",
+  "Viernes: No compres plástico.",
+  "Sábado: Recoge basura en tu comunidad.",
+  "Domingo: Ahorra agua en la ducha."
+];
 
-  if (deferredPrompt) {
-    deferredPrompt.prompt(); // Muestra el diálogo de instalación
+function crearDesafios() {
+  const lista = document.getElementById("lista-desafios");
+  desafios.forEach((desafio, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <span>${desafio}</span>
+      <select>
+        <option>Pendiente</option>
+        <option>Completado</option>
+        <option>No pude</option>
+      </select>
+    `;
+    lista.appendChild(li);
+  });
+}
+crearDesafios();
 
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('Usuario aceptó la instalación');
-      } else {
-        console.log('Usuario rechazó la instalación');
-      }
-      deferredPrompt = null;
-    });
-  }
+// COMENTARIOS
+document.getElementById("comentario-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const nombre = this.nombre.value;
+  const correo = this.correo.value;
+  const comentario = this.comentario.value;
+
+  const div = document.createElement("div");
+  div.innerHTML = `<strong>${nombre}</strong> (${correo}): <p>${comentario}</p>`;
+  document.getElementById("comentarios-lista").appendChild(div);
+
+  this.reset();
 });
