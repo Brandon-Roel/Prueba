@@ -2,22 +2,77 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Amor PWA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoReto - Acción por el Clima</title>
   <link rel="stylesheet" href="styles/style.css" />
   <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icons/heart.png" />
+  <link rel="icon" href="icons/Logo.png" />
+  <script src="https://kit.fontawesome.com/a2e8d6d125.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="container">
-    <img src="icons/heart.png" alt="Corazón" class="heart-icon" />
-    <h1>¡Bienvenido al Amor! 💖</h1>
-    <p id="mensaje">Haz clic para recibir un mensaje de amor</p>
-    <button onclick="mostrarAmor()">💌 Dame amor</button>
-    <!-- Botón para instalar la PWA -->
-    <button id="btnInstalar" style="display:none; margin-top: 20px;">📥 Instalar App</button>
-  </div>
+  <header>
+    <h1>EcoReto: Acción por el Clima</h1>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#consejos">Consejos</a></li>
+        <li><a href="#calculadora">Calculadora</a></li>
+        <li><a href="#desafios">Desafíos</a></li>
+        <li><a href="#comentarios">Comentarios</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Sección Inicio -->
+  <section id="inicio">
+    <h2>¿Qué es la Acción por el Clima?</h2>
+    <p>La Acción por el Clima busca reducir el impacto ambiental que generamos. Cada acción cuenta para proteger nuestro planeta.</p>
+    <img src="icons/Logo2.png" alt="Acción por el Clima" width="200" />
+  </section>
+
+  <!-- Sección Consejos -->
+  <section id="consejos">
+    <h2>Consejo del Día</h2>
+    <div id="consejo"></div>
+    <button onclick="mostrarConsejo()">Nuevo Consejo</button>
+  </section>
+
+  <!-- Sección Calculadora -->
+  <section id="calculadora">
+    <h2>Calculadora de Impacto</h2>
+    <form id="impact-form">
+      <label>¿Cuántos km conduces por semana? <input type="number" id="km" /></label><br />
+      <label>¿Cuántas veces comes carne a la semana? <input type="number" id="carne" /></label><br />
+      <button type="submit">Calcular</button>
+    </form>
+    <div id="resultado"></div>
+    <canvas id="graficoImpacto" width="200" height="200"></canvas>
+    <p id="mensajeMotivador"></p>
+  </section>
+
+  <!-- Sección Desafíos -->
+  <section id="desafios">
+    <h2>Desafíos de la Semana</h2>
+    <ul id="lista-desafios"></ul>
+  </section>
+
+  <!-- Sección Comentarios -->
+  <section id="comentarios">
+    <h2>Deja tu Comentario</h2>
+    <form id="comentario-form">
+      <label>Nombre: <input type="text" name="nombre" required /></label><br />
+      <label>Correo: <input type="email" name="correo" required /></label><br />
+      <label>Comentario: <textarea name="comentario" required></textarea></label><br />
+      <button type="submit">Enviar</button>
+    </form>
+    <div id="comentarios-lista"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 EcoReto - Todos los derechos reservados.</p>
+  </footer>
 
   <script src="js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
